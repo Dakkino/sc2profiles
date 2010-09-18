@@ -1,0 +1,84 @@
+%head
+  %link{ href: 'http://fonts.googleapis.com/css?family=Inconsolata', rel:'stylesheet', type: 'text/css' }
+  %style
+    :plain
+      body{
+        background: #333333;
+        color: #FFFFFF;
+        font-size: 1.2em;
+        font-family: 'Inconsolata', arial, serif;
+      }
+      
+      a {
+        color: #FF0000
+      }
+      a:hover {
+        color: #F0830E
+      }
+      
+      table {
+        border: 1px solid #999999
+      }
+      
+      table th {
+        background: #555555;
+        font-weight: bold;
+        padding: 8px;
+        border-bottom: 1px solid #999999;
+        text-align: left;
+      }
+      table td {
+        padding: 5px 
+      }
+      
+      img.badge {
+        width: 20px
+      }
+      
+      .one_wins {
+        color: #12E73D
+      }
+      .one_lose {
+        color: #E7200E
+      }
+      .one_playeds {
+        color: #E9D435
+      }
+%body
+
+  %h1 Sc2 Profiles
+
+  %h2 Profiles
+
+  %table#profiles{ cellspacing: 0 }
+    %tr
+      %th{ colspan: 2 } 
+      %th.one{ colspan: 5 } 1v1
+      %th.two{ colspan: 4 } 2v2 
+    %tr
+      %th Rank
+      %th Name
+      %th league
+      %th rank
+      %th pts
+      %th wins
+      %th lose
+      %th playeds
+      %th rank
+      %th wins
+      %th playeds
+    - Profile.all.each_with_index do |profile, idx|
+      %tr{ class: "" }
+        %td.pos ##{idx+1}
+        %td.name
+          %a{ href: profile.url }= profile.name
+        %td.one_league
+          %img.badge{ src: "http://eu.battle.net/sc2/static/images/icons/league/#{rank profile.one_league}-small.png" }
+        %td.one_rank=     profile.one_rank
+        %td.one_pts=      profile.one_pts
+        %td.one_wins=     profile.one_playeds
+        %td.one_lose=     profile.one_wins-profile.one_playeds
+        %td.one_playeds=  profile.one_wins
+        %td.two_rank=     rank profile.two_rank
+        %td.two_wins=     profile.two_wins
+        %td.two_playeds=  profile.two_playeds
